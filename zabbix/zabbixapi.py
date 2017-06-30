@@ -6,10 +6,10 @@ from get_data_from_cmdb import get_host_info
 
 class ZabbixTools:
     def __init__(self):
-        self.url = "http://10.201.33.103/api_jsonrpc.php"
+        self.url = "http://1.1.1.3/api_jsonrpc.php"
         self.header = {"Content-Type": "application/json"}
         self.authID = self.user_login()
-        self.enf = u'运维区'
+        self.enf = u'生产环境'
 
     def user_login(self):
         data = json.dumps(
@@ -210,14 +210,7 @@ class ZabbixTools:
 
 
 if __name__ == '__main__':
-    # pass
-    # a = ZabbixTools()
-    # a.get_all_group()
-    # a.del_group(groupname=u'DB_Oracle')
     a = ZabbixTools()
-    # res = a.host_update(u'zls-183', ['GSP', 'GEK'])
-    # print res
-    # print a.get_hostid(u'zls-183')
 
     cmdb_data = a.get_cmdb_data()
     for t in cmdb_data:
