@@ -9,7 +9,7 @@ class ZabbixTools:
         self.url = "http://10.201.33.103/api_jsonrpc.php"
         self.header = {"Content-Type": "application/json"}
         self.authID = self.user_login()
-        self.enf = u'运维区'
+        self.enf = u'生产'
 
     def user_login(self):
         data = json.dumps(
@@ -210,41 +210,34 @@ class ZabbixTools:
 
 
 if __name__ == '__main__':
-    # pass
+    pass
     # a = ZabbixTools()
-    # a.get_all_group()
-    # a.del_group(groupname=u'DB_Oracle')
-    a = ZabbixTools()
-    # res = a.host_update(u'zls-183', ['GSP', 'GEK'])
-    # print res
-    # print a.get_hostid(u'zls-183')
-
-    cmdb_data = a.get_cmdb_data()
-    for t in cmdb_data:
-        if len(t.keys()) == 4:
-            host_ip = t['host_ip']
-            hostname = t['hostname']
-            server_group = t['server_group']
-            if server_group:
-                groupnamelist = server_group.strip().split()
-                if groupnamelist:
-                    print groupnamelist
-                    res = a.host_update(hostname, groupnamelist)
-                    if res:
-                         if res[hostname] == 'update':
-                             with open(u'a.log', 'a') as f:
-                                 f.write('host:%s add to hostgroup: %s \n' % (host_ip, ','.join(groupnamelist)))
-                         elif res[hostname] == 'ok':
-                             with open(u'a.log', 'a') as f:
-                                 f.write('host:%s hostgroup no change \n' % host_ip)
-                         elif res[hostname] == 'error':
-                             with open(u'a.log', 'a') as f:
-                                 f.write('host:%s hostgroup update failed \n' % host_ip)
-                         elif res[hostname] == 'nohost':
-                             with open(u'a.log', 'a') as f:
-                                 f.write('host:%s No found from Zabbix Server \n' % host_ip)
-                         elif res[hostname] == 'grouperr':
-                             with open(u'a.log', 'a') as f:
-                                 f.write('group:%s create Failed' % ','.join(groupnamelist))
-            else:
-                print u'%s group name 空'
+    # cmdb_data = a.get_cmdb_data()
+    # for t in cmdb_data:
+    #     if len(t.keys()) == 4:
+    #         host_ip = t['host_ip']
+    #         hostname = t['hostname']
+    #         server_group = t['server_group']
+    #         if server_group:
+    #             groupnamelist = server_group.strip().split()
+    #             if groupnamelist:
+    #                 print groupnamelist
+    #                 res = a.host_update(hostname, groupnamelist)
+    #                 if res:
+    #                      if res[hostname] == 'update':
+    #                          with open(u'a.log', 'a') as f:
+    #                              f.write('host:%s add to hostgroup: %s \n' % (host_ip, ','.join(groupnamelist)))
+    #                      elif res[hostname] == 'ok':
+    #                          with open(u'a.log', 'a') as f:
+    #                              f.write('host:%s hostgroup no change \n' % host_ip)
+    #                      elif res[hostname] == 'error':
+    #                          with open(u'a.log', 'a') as f:
+    #                              f.write('host:%s hostgroup update failed \n' % host_ip)
+    #                      elif res[hostname] == 'nohost':
+    #                          with open(u'a.log', 'a') as f:
+    #                              f.write('host:%s No found from Zabbix Server \n' % host_ip)
+    #                      elif res[hostname] == 'grouperr':
+    #                          with open(u'a.log', 'a') as f:
+    #                              f.write('group:%s create Failed' % ','.join(groupnamelist))
+    #         else:
+    #             print u'%s group name 空'
